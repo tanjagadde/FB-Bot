@@ -1,7 +1,7 @@
 var express = require('express');
 var fulcrumMiddleware = require('connect-fulcrum-webhook');
 
-var PORT = process.env.PORT || 9000;
+var PORT = process.env.PORT || 3002;
 
 var app = express();
 
@@ -26,9 +26,16 @@ var fulcrumMiddlewareConfig = {
 
 app.use('/', fulcrumMiddleware(fulcrumMiddlewareConfig));
 
-app.get('/', function (req, res) {
-  res.send('<html><head><title>Polis.js</title></head><body><h2>polis.js</h2><p>Up and Running!</p></body></html>');
-})
+// app.get('/', function (req, res) {
+//   res.send('<html><head><title>Polis.js</title></head><body><h2>polis.js</h2><p>Up and Running!</p></body></html>');
+// })
+app.get('/webhook', function (req, res) {
+  if (req.query['hub.verify_token'] === 'my_token') {
+    res.send(req.query['hub.challenge']);
+  } else {
+    res.send('Error, wrong validation token');    
+  }
+});
 
 app.listen(PORT, function () {
   console.log('Listening on port ' + PORT);

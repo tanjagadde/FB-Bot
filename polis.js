@@ -14,6 +14,14 @@ function payloadProcessor (payload, done) {
   // that the webhook has been processed. Call done(), passing an error to return
   // a 500 response to the webhook request, signaling that the request should be
   // tried again later.
+  sendTextMessage('Record id ' + payload.data.id + ' has been updated!', function (error) {
+    if (error) {
+      console.log('sendTextMessage failed with: ', error);
+      done(error);
+    } else {
+      done();
+    }
+  })
   console.log('Payload:');
   console.log(payload);
   done()
@@ -24,7 +32,7 @@ var fulcrumMiddlewareConfig = {
   processor: payloadProcessor
 };
 
-app.use('/', fulcrumMiddleware(fulcrumMiddlewareConfig));
+//app.use('/', fulcrumMiddleware(fulcrumMiddlewareConfig));
 
 // app.get('/', function (req, res) {
 //   res.send('<html><head><title>Polis.js</title></head><body><h2>polis.js</h2><p>Up and Running!</p></body></html>');
@@ -48,7 +56,7 @@ app.post('/', function (req, res) {
        sendTextMessage(sender, "Text received, echo: hey bot");
     }
   }
-  res;
+    res.sendStatus(200);
 });
 
 var token = "CAAYtqUxLl28BAOmBNNTlYhMemritNdlXgNLQLEt36UX3ynMoiEr6lesTpRPqWLbZCWmtDgbPlZAVMl5fmcEZCEPlrmZCUGEBytFZBpjPpp7jtHf5CtDvjjZAtHF4mzX9lxV98R7j3DblPQAUZC8IIoNRuNCbMBh8n3ZAAkfrZC93t1XMtnoGeaAnfkgb4Gb42CDgqwEncRtBKvwZDZD";

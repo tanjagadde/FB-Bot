@@ -1,5 +1,6 @@
 var express = require('express');
-var fulcrumMiddleware = require('connect-fulcrum-webhook');
+var fulcrumMiddleware = require("./webhook_connect");
+//import * as fulcrumMiddleware from "webhook_connect";
 
 var PORT = process.env.PORT || 9000;
 
@@ -14,14 +15,15 @@ function payloadProcessor (payload, done) {
   // that the webhook has been processed. Call done(), passing an error to return
   // a 500 response to the webhook request, signaling that the request should be
   // tried again later.
-  sendTextMessage('Record id ' + payload.data.id + ' has been updated!', function (error) {
-    if (error) {
-      console.log('sendTextMessage failed with: ', error);
-      done(error);
-    } else {
-      done();
-    }
-  })
+  // sendTextMessage('Record id ' + payload.data.id + ' has been updated!', function (error) {
+  //   if (error) {
+  //     console.log('sendTextMessage failed with: ', error);
+  //     done(error);
+  //   } else {
+  //     done();
+  //   }
+  // })
+    
   console.log('Payload:');
   console.log(payload);
   done()
@@ -41,22 +43,23 @@ app.get('/', function (req, res) {
   if (req.query['hub.verify_token'] === 'my_token') {
     res.send(req.query['hub.challenge']);
   } else {
-    res.send('Error, wrong validation token');    
+    res.send('<html><head><title>Polis.js</title></head><body><h2>polis.js</h2><p>Up and Running!</p></body></html>');
   }
 });
 
 app.post('/', function (req, res) {
+  console.log("request is "+req.body)
   messaging_events = req.body.entry[0].messaging;
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
     sender = event.sender.id;
-    console.log("sender ID is ---------"+sender)
     if (event.message && event.message.text) {
       text = event.message.text;
-       sendTextMessage(sender, "Text received, echo: hey bot");
+      // Handle a text message from this sender
+      sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
   }
-    res.sendStatus(200);
+  res.sendStatus(200);
 });
 
 var token = "CAAYtqUxLl28BAOmBNNTlYhMemritNdlXgNLQLEt36UX3ynMoiEr6lesTpRPqWLbZCWmtDgbPlZAVMl5fmcEZCEPlrmZCUGEBytFZBpjPpp7jtHf5CtDvjjZAtHF4mzX9lxV98R7j3DblPQAUZC8IIoNRuNCbMBh8n3ZAAkfrZC93t1XMtnoGeaAnfkgb4Gb42CDgqwEncRtBKvwZDZD";

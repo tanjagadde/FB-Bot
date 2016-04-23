@@ -1,5 +1,6 @@
 var express = require('express');
-var fulcrumMiddleware = require("./webhook_connect");
+//var fulcrumMiddleware = require("./webhook_connect");
+var bodyParser = require('body-parser');
 //import * as fulcrumMiddleware from "webhook_connect";
 
 var PORT = process.env.PORT || 9000;
@@ -33,9 +34,16 @@ var fulcrumMiddlewareConfig = {
   actions: ['record.create', 'record.update'],
   processor: payloadProcessor
 };
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 //app.use('/', fulcrumMiddleware(fulcrumMiddlewareConfig));
-
+//app.configure(function(){
+  //app.use(bodyParser);
+  //app.use(app.router);
+//});
 // app.get('/', function (req, res) {
 //   res.send('<html><head><title>Polis.js</title></head><body><h2>polis.js</h2><p>Up and Running!</p></body></html>');
 // })
@@ -48,17 +56,17 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', function (req, res) {
-  console.log("request is "+req.body)
-  // messaging_events = req.body.entry[0].messaging;
-  // for (i = 0; i < messaging_events.length; i++) {
-  //   event = req.body.entry[0].messaging[i];
-  //   sender = event.sender.id;
-  //   if (event.message && event.message.text) {
-  //     text = event.message.text;
-  //     // Handle a text message from this sender
-  //     sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
-  //   }
-  // }
+  console.log("request is "+req.method+ req.body);
+  messaging_events = req.body.entry[0].messaging;
+  for (i = 0; i < messaging_events.length; i++) {
+    event = req.body.entry[0].messaging[i];
+    sender = event.sender.id;
+    if (event.message && event.message.text) {
+      text = event.message.text;
+      // Handle a text message from this sender
+      sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
+    }
+  }
   res.sendStatus(200);
 });
 

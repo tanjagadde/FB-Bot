@@ -2,6 +2,7 @@ function getRequestBody (req, callback) {
   if (req.body) {
     // Lots of apps use body-parser, so just use that if
     // the request has already been inflated.
+    console.log("in getRequestbody method"+req.body);
     callback(null, req.body);
   } else {
     // Require this module just-in-time in the case
@@ -9,14 +10,15 @@ function getRequestBody (req, callback) {
     var getRawBody = require('raw-body');
 
     getRawBody(req, function (error, text) {
+      console.log("in getRawbody method"+req.body);
       if (error) { callback(error); }
       var body;
 
       try {
         //body = JSON.parse(text);
-        console.log('body is'+body);
+        //console.log('body is'+body);
         body = text;
-        console.log(body);
+       // console.log(body);
       } catch (err) {
         callback(new Error('No body could be parsed.'));
       }
@@ -31,11 +33,11 @@ module.exports = function (config) {
   if (!config.processor) { throw new Error('A processor must be passed.') }
 
   function middleware (req, res, next) {
-    console.log('req method is'+req.method+req.body);
+    //console.log('req method is'+req.method+req.body);
     if (req.method !== 'POST') {
       return next();
     }
-
+    
     getRequestBody(req, function (error, body) {
       if (error) {
         console.log('Error parsing body: ', error);
@@ -51,8 +53,8 @@ module.exports = function (config) {
         if (error) {
           return res.status(500).send(error);
         }
-
-        res.send('ok');
+        
+        res.send('hi');
       });
     });
   }

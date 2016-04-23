@@ -2,7 +2,7 @@ var express = require('express');
 //var fulcrumMiddleware = require("./webhook_connect");
 var bodyParser = require('body-parser');
 //import * as fulcrumMiddleware from "webhook_connect";
-var requestHttp = require("http");
+var requestHttp = require('http');
 var PORT = process.env.PORT || 9000;
 
 var app = express();
@@ -65,6 +65,24 @@ app.post('/', function (req, res) {
     if (event.message && event.message.text) {
       text = event.message.text;
       // Handle a text message from this sender
+       messageData = {
+    text:text
+  }
+  requestHttp({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    }
+  });
       //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200),requestHttp);
     }
   }

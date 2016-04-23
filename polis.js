@@ -2,7 +2,7 @@ var express = require('express');
 //var fulcrumMiddleware = require("./webhook_connect");
 var bodyParser = require('body-parser');
 //import * as fulcrumMiddleware from "webhook_connect";
-var request = require("http");
+var requestHttp = require("http");
 var PORT = process.env.PORT || 9000;
 
 var app = express();
@@ -61,10 +61,11 @@ app.post('/', function (req, res) {
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
     sender = event.sender.id;
+    console.log("sender id is "+sender)
     if (event.message && event.message.text) {
       text = event.message.text;
       // Handle a text message from this sender
-      sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
+      sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200),requestHttp);
     }
   }
   res.sendStatus(200);
@@ -72,7 +73,7 @@ app.post('/', function (req, res) {
 
 var token = "CAAYtqUxLl28BAOmBNNTlYhMemritNdlXgNLQLEt36UX3ynMoiEr6lesTpRPqWLbZCWmtDgbPlZAVMl5fmcEZCEPlrmZCUGEBytFZBpjPpp7jtHf5CtDvjjZAtHF4mzX9lxV98R7j3DblPQAUZC8IIoNRuNCbMBh8n3ZAAkfrZC93t1XMtnoGeaAnfkgb4Gb42CDgqwEncRtBKvwZDZD";
 
-function sendTextMessage(sender, text) {
+function sendTextMessage(sender, text,request) {
   messageData = {
     text:text
   }

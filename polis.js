@@ -56,7 +56,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', function (req, res) {
-  console.log("request is "+req.method+ req.body);
+  console.log("request is "+req.method+ req.body.text);
   messaging_events = req.body.entry[0].messaging;
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
@@ -65,7 +65,7 @@ app.post('/', function (req, res) {
     if (event.message && event.message.text) {
       text = event.message.text;
       // Handle a text message from this sender
-      sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200),requestHttp);
+      //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200),requestHttp);
     }
   }
   res.sendStatus(200);

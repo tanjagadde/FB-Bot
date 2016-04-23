@@ -56,7 +56,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', function (req, res) {
-  console.log("request is "+req.method+ req.body.text);
+  console.log("request is "+req.method+ req.body.entry[0].messaging);
   messaging_events = req.body.entry[0].messaging;
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
@@ -73,26 +73,26 @@ app.post('/', function (req, res) {
 
 var token = "CAAYtqUxLl28BAOmBNNTlYhMemritNdlXgNLQLEt36UX3ynMoiEr6lesTpRPqWLbZCWmtDgbPlZAVMl5fmcEZCEPlrmZCUGEBytFZBpjPpp7jtHf5CtDvjjZAtHF4mzX9lxV98R7j3DblPQAUZC8IIoNRuNCbMBh8n3ZAAkfrZC93t1XMtnoGeaAnfkgb4Gb42CDgqwEncRtBKvwZDZD";
 
-function sendTextMessage(sender, text,request) {
-  messageData = {
-    text:text
-  }
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token:token},
-    method: 'POST',
-    json: {
-      recipient: {id:sender},
-      message: messageData,
-    }
-  }, function(error, response, body) {
-    if (error) {
-      console.log('Error sending message: ', error);
-    } else if (response.body.error) {
-      console.log('Error: ', response.body.error);
-    }
-  });
-}
+// function sendTextMessage(sender, text,request) {
+//   messageData = {
+//     text:text
+//   }
+//   request({
+//     url: 'https://graph.facebook.com/v2.6/me/messages',
+//     qs: {access_token:token},
+//     method: 'POST',
+//     json: {
+//       recipient: {id:sender},
+//       message: messageData,
+//     }
+//   }, function(error, response, body) {
+//     if (error) {
+//       console.log('Error sending message: ', error);
+//     } else if (response.body.error) {
+//       console.log('Error: ', response.body.error);
+//     }
+//   });
+// }
 
 app.listen(PORT, function () {
   console.log('Listening on port ' + PORT);

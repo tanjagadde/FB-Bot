@@ -65,9 +65,11 @@ app.post('/', function (req, res) {
     if (event.message && event.message.text) {
       text = event.message.text;
       // Handle a text message from this sender
+       console.log("message/text echoed back is***** "+text);
        messageData = {
     text:text
   }
+
   requestHttp({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {access_token:token},

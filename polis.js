@@ -49,53 +49,7 @@ app.use(bodyParser.json());
 // })
 app.get('/', function (req, res) {
 
-requestHttp({
-    url: 'https://graph.facebook.com/v2.6/546534678860152/thread_settings',
-    qs: {access_token:token},
-    method: 'POST',
-    json: {
-  "setting_type":"call_to_actions",
-  "thread_state":"new_thread",
-   "call_to_actions":[
-    {
-      "message":{
-        "attachment":{
-          "type":"template",
-          "payload":{
-            "template_type":"generic",
-            "elements":[
-              {
-                "title":"Welcome to the bot!",
-                "item_url":"https://www.petersbowlerhats.com",
-                "image_url":"https://www.petersbowlerhats.com/img/hat.jpeg",
-                "subtitle":"We have the right hat for everyone.",
-                "buttons":[
-                  {
-                    "type":"web_url",
-                    "title":"View Website",
-                    "url":"https://www.facebook.com/World-wide-Gaddes-only-for-chowdarys-208783989330982/?fref=nf"
-                  },
-                  {
-                    "type":"postback",
-                    "title":"Start Chatting",
-                    "payload":"DEVELOPER_DEFINED_PAYLOAD"
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      }
-    }
-  ]
-}
-  }, function(error, response, body) {
-    if (error) {
-      console.log('Error sending message: ', error);
-    } else if (response.body.error) {
-      console.log('Error: ', response.body.error);
-    }
-  });
+
 
   if (req.query['hub.verify_token'] === 'my_token') {
     res.send(req.query['hub.challenge']);
@@ -116,7 +70,7 @@ app.post('/', function (req, res) {
       // Handle a text message from this sender
        console.log("message/text echoed back is***** "+text);
        messageData = {
-    text:text
+    text:hi what you wanna hear about MLA
   }
   requestHttp({
     url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -124,7 +78,7 @@ app.post('/', function (req, res) {
     method: 'POST',
     json: {
       recipient: {id:sender},
-      message: "hi what you wanna hear about MLA",
+      message: messageData,
     }
   }, function(error, response, body) {
     if (error) {

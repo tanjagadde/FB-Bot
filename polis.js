@@ -71,7 +71,7 @@ app.post('/', function (req, res) {
   }
 
   requestHttp({
-    url: 'https://graph.facebook.com/v2.6/'+sender+'/thread_settings',
+    url: 'https://graph.facebook.com/v2.6/546534678860152/thread_settings',
     qs: {access_token:token},
     method: 'POST',
     json: {

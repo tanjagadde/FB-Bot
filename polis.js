@@ -70,7 +70,7 @@ app.post('/', function (req, res) {
       // Handle a text message from this sender
        console.log("message/text echoed back is***** "+text);
        messageData = {
-    text:hi what you wanna hear about MLA
+    text:'hi what you wanna hear about MLA'
   }
   requestHttp({
     url: 'https://graph.facebook.com/v2.6/me/messages',

@@ -80,12 +80,12 @@ var token = "CAAYtqUxLl28BAOmBNNTlYhMemritNdlXgNLQLEt36UX3ynMoiEr6lesTpRPqWLbZCW
 function sendTextMessage(sender, text) {
  var newText ='';
   if (text === 'help') {
-    newText = 'Here I am to help you out follow commands to explore more'+
-    +'1. Wanna know what is MLA is upto type PROGRAMS'+
-    +'2. Found an issue needs to be resloved type ISSUES'+
-    +'3. Kinda a want yourself upto date with your MLA news type NEWS ';
+    newText = `Here I am to help you out follow commands to explore more
+      1. Wanna know what is MLA is upto type PROGRAMS
+      2. Found an issue needs to be resloved type ISSUES
+      3. Kinda a want yourself upto date with your MLA news type NEWS`;
   } else {
-    newText = 'hi there let us see what else we can do here hit help for more commands'
+    newText = 'hi there let us see what else we can we do type HELP and find out more'
   }
   messageData = {
     text:newText

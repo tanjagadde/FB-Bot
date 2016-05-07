@@ -66,9 +66,33 @@ app.post('/', function (req, res) {
       text = event.message.text;
       // Handle a text message from this sender
        console.log("message/text echoed back is***** "+text);
+       if text.indexOf
        messageData = {
     text:text
   }
+
+  requestHttp({
+    url: 'https://graph.facebook.com/v2.6/'+sender+'/thread_settings',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+  "setting_type":"call_to_actions",
+  "thread_state":"new_thread",
+  "call_to_actions":[
+    {
+      "message":{
+        "text":"Welcome to My Bot!"
+      }
+    }
+  ]
+}
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    }
+  });
 
   requestHttp({
     url: 'https://graph.facebook.com/v2.6/me/messages',

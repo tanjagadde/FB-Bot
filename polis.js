@@ -69,9 +69,6 @@ app.post('/', function (req, res) {
       text = event.message.text;
       // Handle a text message from this sender
        console.log("message/text echoed back is***** "+text);
-       messageData = {
-       text:'hi there let us see what else we can do here hit help for more commands'
-  }
       sendTextMessage(sender, text);
     }
   }
@@ -82,7 +79,15 @@ var token = "CAAYtqUxLl28BAOmBNNTlYhMemritNdlXgNLQLEt36UX3ynMoiEr6lesTpRPqWLbZCW
 
 function sendTextMessage(sender, text) {
   messageData = {
-    text:text
+      if(text==='help'){
+        text:'Here I am to help you out follow commands to explore more
+              1.Wanna know what is MLA is upto type PROGRAMS
+              2.Found an issue needs to be resloved type ISSUES
+              3.Kinda a want yourself upto date with your MLA news type NEWS '
+      }
+      else{
+       text:'hi there let us see what else we can do here hit help for more commands'
+     }
   }
   requestHttp({
     url: 'https://graph.facebook.com/v2.6/me/messages',

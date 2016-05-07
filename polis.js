@@ -66,7 +66,6 @@ app.post('/', function (req, res) {
       text = event.message.text;
       // Handle a text message from this sender
        console.log("message/text echoed back is***** "+text);
-       if text.indexOf
        messageData = {
     text:text
   }

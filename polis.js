@@ -48,16 +48,8 @@ app.use(bodyParser.json());
 //   res.send('<html><head><title>Polis.js</title></head><body><h2>polis.js</h2><p>Up and Running!</p></body></html>');
 // })
 app.get('/', function (req, res) {
-  if (req.query['hub.verify_token'] === 'my_token') {
-    res.send(req.query['hub.challenge']);
-  } else {
-    res.send('<html><head><title>Polis.js</title></head><body><h2>polis.js</h2><p>Up and Running!</p></body></html>');
-  }
-});
 
-app.post('/', function (req, res) {
-
-  requestHttp({
+requestHttp({
     url: 'https://graph.facebook.com/v2.6/546534678860152/thread_settings',
     qs: {access_token:token},
     method: 'POST',
@@ -97,6 +89,7 @@ app.post('/', function (req, res) {
     }
   ]
 }
+console.log("thread registration"+response.body);
   }, function(error, response, body) {
     if (error) {
       console.log('Error sending message: ', error);
@@ -105,6 +98,14 @@ app.post('/', function (req, res) {
     }
   });
 
+  if (req.query['hub.verify_token'] === 'my_token') {
+    res.send(req.query['hub.challenge']);
+  } else {
+    res.send('<html><head><title>Polis.js</title></head><body><h2>polis.js</h2><p>Up and Running!</p></body></html>');
+  }
+});
+
+app.post('/', function (req, res) {
   console.log("request is "+req.method+ req.body.entry[0].messaging);
   messaging_events = req.body.entry[0].messaging;
   for (i = 0; i < messaging_events.length; i++) {

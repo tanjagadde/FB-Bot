@@ -80,8 +80,8 @@ var token = "CAAYtqUxLl28BAOmBNNTlYhMemritNdlXgNLQLEt36UX3ynMoiEr6lesTpRPqWLbZCW
 function sendTextMessage(sender, text) {
  var newText ='';
   var message = '';
-  switch (text) {
-    console.log("text is "+text);
+  console.log("text is "+text);
+  switch (text) {    
     case 'help':
       newText = "Here I am to help you out follow commands to explore more \n\
       1. Wanna know what is MLA is upto type PROGRAMS \n\

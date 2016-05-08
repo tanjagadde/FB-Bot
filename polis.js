@@ -118,7 +118,7 @@ var newText ='';
 
     case 'news':
       messageIS = "\"message\":{\r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"image_url\":\"http://gadderamamohan.com/home_slideshow/SLIDE1032004.jpg\",\r\n                \"subtitle\":\"Meet The man\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/news.php\"\r\n                  },\r\n                  {\r\n                    \"type\":\"postback\",\r\n                    \"title\":\"Start chatting\",\r\n                    \"payload\":\"DEVELOPER_DEFINED_PAYLOAD\"\r\n                  }\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      }";
-      
+
      console.log("message is news"+messageIS);
       return;
 
@@ -138,7 +138,7 @@ var newText ='';
     method: 'POST',
     json: {
       recipient: {id:sender},
-      message: JSON.parse(messageIS);,
+      message: JSON.parse(messageIS),
     }
   }, function(error, response, body) {
     if (error) {

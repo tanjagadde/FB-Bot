@@ -79,7 +79,7 @@ var token = "CAAYtqUxLl28BAOmBNNTlYhMemritNdlXgNLQLEt36UX3ynMoiEr6lesTpRPqWLbZCW
 
 function sendTextMessage(sender, text) {
  var newText ='';
-  var message = '';
+  var messageIS = '';
   console.log("text is "+text);
   switch (text) {    
     case 'help':
@@ -87,32 +87,32 @@ function sendTextMessage(sender, text) {
       1. Wanna know what is MLA is upto type PROGRAMS \n\
       2. Found an issue needs to be resloved type ISSUES \n\
       3. Kinda a want yourself upto date with your MLA news type NEWS";
-      message = "{text:" + newText + "}"
-      console.log("message is help"+message);
+      messageIS = "{text:" + newText + "}"
+      console.log("message is help"+messageIS);
       return;
 
     case 'program':
-      message = " \r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/programs.php\"\r\n                  },\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      ";
-      console.log("message is program"+message);
+      messageIS = " \r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/programs.php\"\r\n                  },\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      ";
+      console.log("message is program"+messageIS);
       return;
 
     case 'issues':
-      message = " \r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/post_a_issue.php\"\r\n                  },\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      ";
-     console.log("message is issues"+message);
+      messageIS = " \r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/post_a_issue.php\"\r\n                  },\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      ";
+     console.log("message is issues"+messageIS);
       return;
 
     case 'news':
-      message = " \r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/news.php\"\r\n                  },\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      ";
-     console.log("message is news"+message);
+      messageIS = " \r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/news.php\"\r\n                  },\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      ";
+     console.log("message is news"+messageIS);
       return;
 
     default:
       newText = 'hi there wanna know more hit HELP'
-      message = "{text:" + newText + "}"
-      console.log("message is default"+message);
+      messageIS = "{text:" + newText + "}"
+      console.log("message is default"+messageIS);
   }
-    console.log("message is"+message);
-   var messageData = message;
+    console.log("message is"+messageIS);
+  // var messageData = message;
 
   requestHttp({
     url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -120,7 +120,7 @@ function sendTextMessage(sender, text) {
     method: 'POST',
     json: {
       recipient: {id:sender},
-      message: messageData,
+      message: messageIS,
     }
   }, function(error, response, body) {
     if (error) {

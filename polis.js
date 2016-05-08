@@ -106,11 +106,11 @@ function sendTextMessage(sender, text) {
                case 'news': message=" \r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/news.php\"\r\n                  },\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      ";
                break;
             
-                newText = 'hi there wanna know more hit HELP'
+              default:   newText = 'hi there wanna know more hit HELP'
                  message="{text:"+newText+"}"
             }
 
-messageData = message
+    messageData = message
 
   requestHttp({
     url: 'https://graph.facebook.com/v2.6/me/messages',

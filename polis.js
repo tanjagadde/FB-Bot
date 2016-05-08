@@ -130,7 +130,7 @@ var newText ='';
     console.log("message is"+messageIS);
 
 
-var messageData = JSON.parse(messageIS);
+var messageData = messageIS;
 console.log("message date json parsed"+messageDate);
 
   requestHttp({

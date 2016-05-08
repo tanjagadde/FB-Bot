@@ -130,7 +130,8 @@ var newText ='';
     console.log("message is"+messageIS);
 
 
-
+var messageData = JSON.parse(messageIS);
+console.log("message date json parsed"+messageDate);
 
   requestHttp({
     url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -138,7 +139,7 @@ var newText ='';
     method: 'POST',
     json: {
       recipient: {id:sender},
-      message: JSON.parse(messageIS),
+      message: messageData,
     }
   }, function(error, response, body) {
     if (error) {

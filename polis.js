@@ -81,21 +81,19 @@ function sendGenericMessage(urlIs) {
   "attachment": {
     "type": "template",
     "payload": {
-      "template_type": "generic",
-      "elements": [{
-        "title": "",
-        "subtitle": "",
-        "image_url": "",
-        "buttons": [{
-          "type": "web_url",
-          "url": urlIs,
-          "title": "Web url"
-        }]
-      }]
+      "template_type": "button",
+      "text":"Go ahead click on the below link",
+      "buttons":[
+          {
+            "type":"web_url",
+            "url": urlIs,
+            "title":"Show Website"
+          }
+        ]
     }
   }
 }
-console.log("generic messagedata"+messageData)
+console.log("generic messagedata"+messageData.attachment.payload.buttons[0].url)
   return messageData
 }
 

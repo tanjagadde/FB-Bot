@@ -65,6 +65,8 @@ app.post('/', function (req, res) {
     event = req.body.entry[0].messaging[i];
     sender = event.sender.id;
     console.log("sender id is "+sender)
+    console.log("sender message "+event.message)
+    console.log("sender message text "+event.message.text)
     if (event.message && event.message.text) {
       text = event.message.text;
       // Handle a text message from this sender

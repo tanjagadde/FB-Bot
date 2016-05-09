@@ -76,6 +76,32 @@ app.post('/', function (req, res) {
 });
 
 
+function sendGenericMessage(urlIs) {
+  messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [{
+          "title": "First card",
+          "subtitle": "Element #1 of an hscroll",
+          "image_url": urlIs,
+          "buttons": [{
+            "type": "web_url",
+            "url": "https://www.messenger.com/",
+            "title": "Web url"
+          }, {
+            "type": "postback",
+            "title": "Postback",
+            "payload": "Payload for first element in a generic bubble",
+          }],
+        }
+      }
+    }
+  };
+  return messageData
+}
+
 function sendTextMessage(sender, text) {
   var token = "CAAYtqUxLl28BAOmBNNTlYhMemritNdlXgNLQLEt36UX3ynMoiEr6lesTpRPqWLbZCWmtDgbPlZAVMl5fmcEZCEPlrmZCUGEBytFZBpjPpp7jtHf5CtDvjjZAtHF4mzX9lxV98R7j3DblPQAUZC8IIoNRuNCbMBh8n3ZAAkfrZC93t1XMtnoGeaAnfkgb4Gb42CDgqwEncRtBKvwZDZD";
 
@@ -94,7 +120,8 @@ function sendTextMessage(sender, text) {
 
 
 var newText ='';
-  var messageIS = '';
+  //var messageIS = '';
+  var messageData = {};
   console.log("text is "+text);
   switch (text) {    
     case 'help':
@@ -102,36 +129,40 @@ var newText ='';
       1. Wanna know what is MLA is upto type PROGRAMS \n\
       2. Found an issue needs to be resloved type ISSUES \n\
       3. Kinda a want yourself upto date with your MLA news type NEWS";
-      messageIS = "{text:" + newText + "}"
-      console.log("message is help"+messageIS);
+      messageData = {text:newText }
+      //console.log("message is help"+messageIS);
       return;
 
     case 'program':
-      messageIS = "\"message\":{\r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"image_url\":\"http://gadderamamohan.com/home_slideshow/SLIDE1032004.jpg\",\r\n                \"subtitle\":\"Meet The man\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/programs.php\"\r\n                  },\r\n                  {\r\n                    \"type\":\"postback\",\r\n                    \"title\":\"Start chatting\",\r\n                    \"payload\":\"DEVELOPER_DEFINED_PAYLOAD\"\r\n                  }\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      }";
-      console.log("message is program"+messageIS);
+      // messageIS = "\"message\":{\r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"image_url\":\"http://gadderamamohan.com/home_slideshow/SLIDE1032004.jpg\",\r\n                \"subtitle\":\"Meet The man\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/programs.php\"\r\n                  },\r\n                  {\r\n                    \"type\":\"postback\",\r\n                    \"title\":\"Start chatting\",\r\n                    \"payload\":\"DEVELOPER_DEFINED_PAYLOAD\"\r\n                  }\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      }";
+      // console.log("message is program"+messageIS);
+      messageData=sendGenericMessage("http://gadderamamohan.com/programs.php")
       return;
 
     case 'issues':
-      messageIS = "\"message\":{\r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"image_url\":\"http://gadderamamohan.com/home_slideshow/SLIDE1032004.jpg\",\r\n                \"subtitle\":\"Meet The man\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/post_a_issue.php\"\r\n                  },\r\n                  {\r\n                    \"type\":\"postback\",\r\n                    \"title\":\"Start chatting\",\r\n                    \"payload\":\"DEVELOPER_DEFINED_PAYLOAD\"\r\n                  }\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      }";
+     //  messageIS = "\"message\":{\r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"image_url\":\"http://gadderamamohan.com/home_slideshow/SLIDE1032004.jpg\",\r\n                \"subtitle\":\"Meet The man\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/post_a_issue.php\"\r\n                  },\r\n                  {\r\n                    \"type\":\"postback\",\r\n                    \"title\":\"Start chatting\",\r\n                    \"payload\":\"DEVELOPER_DEFINED_PAYLOAD\"\r\n                  }\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      }";
    
-     console.log("message is issues"+messageIS);
+     // console.log("message is issues"+messageIS);
+      messageData=sendGenericMessage("http://gadderamamohan.com/programs.php")
       return;
 
-    case 'news':
-      messageIS = "\"message\":{\r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"image_url\":\"http://gadderamamohan.com/home_slideshow/SLIDE1032004.jpg\",\r\n                \"subtitle\":\"Meet The man\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/news.php\"\r\n                  },\r\n                  {\r\n                    \"type\":\"postback\",\r\n                    \"title\":\"Start chatting\",\r\n                    \"payload\":\"DEVELOPER_DEFINED_PAYLOAD\"\r\n                  }\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      }";
 
-     console.log("message is news"+messageIS);
+    case 'news':
+     //  messageIS = "\"message\":{\r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"image_url\":\"http://gadderamamohan.com/home_slideshow/SLIDE1032004.jpg\",\r\n                \"subtitle\":\"Meet The man\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/news.php\"\r\n                  },\r\n                  {\r\n                    \"type\":\"postback\",\r\n                    \"title\":\"Start chatting\",\r\n                    \"payload\":\"DEVELOPER_DEFINED_PAYLOAD\"\r\n                  }\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      }";
+
+     // console.log("message is news"+messageIS);
+     messageData=sendGenericMessage("http://gadderamamohan.com/programs.php")
       return;
 
     default:
       newText = 'hi there wanna know more hit HELP'
-      messageIS = "{text:" + newText + "}"
+      messageData = {text:newText }
       console.log("message is default"+messageIS);
   }
-    console.log("message is"+messageIS);
+   // console.log("message is"+messageIS);
 
 
-var messageData = messageIS;
+//var messageData = messageIS;
 console.log("message date json parsed"+messageData);
 
   requestHttp({

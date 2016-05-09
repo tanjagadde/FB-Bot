@@ -78,27 +78,23 @@ app.post('/', function (req, res) {
 
 function sendGenericMessage(urlIs) {
   messageData = {
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "generic",
-        "elements": [{
-          "title": "First card",
-          "subtitle": "Element #1 of an hscroll",
-          "image_url": urlIs,
-          "buttons": [{
-            "type": "web_url",
-            "url": "https://www.messenger.com/",
-            "title": "Web url"
-          }, {
-            "type": "postback",
-            "title": "Postback",
-            "payload": "Payload for first element in a generic bubble",
-          }],
-        }
-      }
+  "attachment": {
+    "type": "template",
+    "payload": {
+      "template_type": "generic",
+      "elements": [{
+        "title": "First card",
+        "subtitle": "Element #1 of an hscroll",
+        "image_url": urlIs,
+        "buttons": [{
+          "type": "web_url",
+          "url": "https://www.messenger.com/",
+          "title": "Web url"
+        }]
+      }]
     }
-  };
+  }
+}
   return messageData
 }
 

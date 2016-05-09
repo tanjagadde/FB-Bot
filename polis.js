@@ -127,12 +127,14 @@ function sendTextMessage(sender, text) {
       messageData = {
           text: newText
         }
+        console.log("message is program"+messageData)
       return;
 
     case 'program':
       // messageIS = "\"message\":{\r\n        \"attachment\":{\r\n          \"type\":\"template\",\r\n          \"payload\":{\r\n            \"template_type\":\"generic\",\r\n            \"elements\":[\r\n              {\r\n                \"title\":\"Talk and know your MLA\",\r\n                \"image_url\":\"http://gadderamamohan.com/home_slideshow/SLIDE1032004.jpg\",\r\n                \"subtitle\":\"Meet The man\",\r\n                \"buttons\":[\r\n                  {\r\n                    \"type\":\"web_url\",\r\n                    \"title\":\"View Website\",\r\n                    \"url\":\"http://gadderamamohan.com/programs.php\"\r\n                  },\r\n                  {\r\n                    \"type\":\"postback\",\r\n                    \"title\":\"Start chatting\",\r\n                    \"payload\":\"DEVELOPER_DEFINED_PAYLOAD\"\r\n                  }\r\n                ]\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      }";
       // console.log("message is program"+messageIS);
       messageData = sendGenericMessage("http://gadderamamohan.com/programs.php")
+      console.log("message is program"+messageData)
       return;
 
     case 'issues':
@@ -140,6 +142,7 @@ function sendTextMessage(sender, text) {
 
       // console.log("message is issues"+messageIS);
       messageData = sendGenericMessage("http://gadderamamohan.com/programs.php")
+      console.log("message is program"+messageData)
       return;
 
     case 'news':
@@ -147,6 +150,7 @@ function sendTextMessage(sender, text) {
 
       // console.log("message is news"+messageIS);
       messageData = sendGenericMessage("http://gadderamamohan.com/programs.php")
+      console.log("message is program"+messageData)
       return;
 
     default:
@@ -154,8 +158,8 @@ function sendTextMessage(sender, text) {
       messageData = {
         text: newText
       }
-      console.log("message is default" + messageIS);
-  }
+      console.log("message is default" + messageData);
+  };
   // console.log("message is"+messageIS);
 
   //var messageData = messageIS;

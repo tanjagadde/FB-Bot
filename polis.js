@@ -118,7 +118,7 @@ function sendTextMessage(sender, text) {
   var newText = '';
   console.log("text is " + text);
   switch (text) {
-    case 'help':
+    case 'HELP':
       newText = "Here I am to help you out follow commands to explore more \n\
       1. Wanna know what MLA is upto ? type PROGRAMS \n\
       2. Found an issue ? needs to be resloved ? type ISSUES \n\

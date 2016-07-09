@@ -64,7 +64,7 @@ function sendGenericMessage(urlIs) {
 }
 
 function sendTextMessage(sender, text) {
-  var token = "CAAYtqUxLl28BAOmBNNTlYhMemritNdlXgNLQLEt36UX3ynMoiEr6lesTpRPqWLbZCWmtDgbPlZAVMl5fmcEZCEPlrmZCUGEBytFZBpjPpp7jtHf5CtDvjjZAtHF4mzX9lxV98R7j3DblPQAUZC8IIoNRuNCbMBh8n3ZAAkfrZC93t1XMtnoGeaAnfkgb4Gb42CDgqwEncRtBKvwZDZD";
+  var token = "Add the token generated fromt the fb app dashboard";
 
   var newText = '';
   console.log("text is " + text);
